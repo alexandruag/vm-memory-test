@@ -1,0 +1,26 @@
+[package]
+name = "vm-memory-test"
+version = "0.1.0"
+authors = ["Alexandru Agache <aagch@amazon.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libc = ">=0.2.71"
+
+[dev-dependencies]
+criterion = ">=0.3.0"
+vm-memory = { git = "https://github.com/rust-vmm/vm-memory.git", branch = "master", features = ["backend-mmap"] }
+vm-memory2 = { git = "https://github.com/jiangliu/vm-memory.git", branch = "enhancement", features = ["backend-mmap"], package = "vm-memory" }
+vmm-sys-util = ">=0.4.0"
+
+[[bench]]
+name = "main"
+harness = false
+
+[profile.bench]
+lto = true
+
+[profile.release]
+lto = true
